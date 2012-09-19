@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>应用汇抽奖系统</title>
+<meta property="wb:webmaster" content="84fa9a1bab7ca558" />
+<link rel="stylesheet" type="text/css" href="style/bootstrap.css" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="js/lottery.js"></script>
+<style type="text/css">
+	body{background:#ffc20f url(./img/bg.jpg) no-repeat top center;}
+	.about{position: absolute; top: 20px; right: 20px;}
+	.ini{position: absolute; top:20px; right: 90px;}
+	.main{margin-top: 170px;}
+	#print_box{padding:20px 0 5px 0;  text-align: center; font-weight: 700; font-size: 16px;}
+	#rolling_board{ line-height: 1.5; margin:10px 0; font-size: 50px; font-weight: 700; text-align: center;padding:50px 0;}
+	#result label{color: #d14; font-weight: 700; font-size: 16px;margin:10px 0;}
+	#result span,#candidate span{ margin:5px;}
+</style>
+</head>
+<body>
+<a class="btn btn-small btn-info about"   data-toggle="modal" href="#myModal1"><i class="icon-info-sign icon-white"></i> 关于</a>
+<a class="btn btn-small ini"   data-toggle="modal" href="#myModal"><i class="icon-cog"></i> 设置</a>
+<div class="container">
+<div class="span12 main">
+		<div class="well">
+			<h3>候选人名单</h3>
+			<div id="candidate">暂无结果</div>
+		</div>
+</div>
+<div class="span12">
+		<div class="well">
+			<div id="rotate_div" style="">
+				<h2 id="current_step"></h2>
+
+				<div id="rolling_board" class="alert alert-info" style="display: none; ">...</div>
+				
+				<div id="print_box">请按空格键开始</div>
+			</div>
+		</div>
+</div>
+
+<div class="span12">
+	
+	<div class="well">
+		<h3>中奖名单</h3>
+		<div id="result">暂无结果</div>
+	</div>
+</div>
+
+</div>
+<!--ini-->
+<div class="modal hide" id="myModal">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h3>系统设置</h3>
+</div>
+<div class="modal-body">
+<h3>奖项设置</h3>
+<p>每行一个奖项, 格式为竖线分隔的: 奖项名|数量|每次抽几个|奖品</p>
+<textarea name="prizes" style="width:400px;" rows="5" >
+三等奖|10|10|iphone4一台/每人
+二等奖|2|2|macbook一台/每人
+一等奖|1|1|imac一台/每人
+</textarea>
+
+<h3>候选人列表</h3>
+<p>每行一人, 或半角逗号分隔</p>
+<textarea name="candidates" rows="5" style="width:400px;" >
+</textarea>
+<h3>跳动时间间隔</h3>
+<p><input type="text" name="interval" value="50" style="width: 50px;" /> ms</p>
+</div>
+<div class="modal-footer">
+<a href="#" class="btn" data-dismiss="modal">取消</a>
+<a href="#" class="btn btn-primary" onclick="save_setting()" data-dismiss="modal">保存</a>
+</div>
+</div>
+<!--/ini-->
+<!--about-->
+<div class="modal hide" id="myModal1">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h3>关于</h3>
+</div>
+<div class="modal-body">
+	<ul>
+		<li>JavaScript+HTML+CSS开发而成, 支持IE6+,Chrome,Firefox等浏览器。</li>
+		<li>抽奖过程全键盘操作, 只需要按回车键即可。</li>
+		<li>支持活动标题, 奖项, 候选人, 摇奖时的跳转速度等设置。</li>
+		<li>程序用<a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a>、<a herf="http://jquery.com/" target="_blank">jQuery</a>开发而成，技术支持<a href="http://weibo.com/dcoupe" target="_blank">@濯焰</a></li>
+	</ul>
+</div>
+</div>
+<!--/about-->
+<script type="text/javascript">
+var game;
+$(function(){
+	game = new Game();
+	save_setting();
+});
+// 绑定空格键键盘操作
+$(document).keypress(function (e){
+	switch(e.which){
+		case 13:
+			game.process();
+			break;
+	}
+});
+</script>
+</body>
+</html>
