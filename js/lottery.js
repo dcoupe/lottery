@@ -105,12 +105,12 @@ var Game = function(){
 			var p = self.prizes[i];
 			self.results[i] = [];
 		}
-		
+
 		show_current_step('');
 		var str = '请按回车键开始';
 		str += '<br/><br/>';
 		print_box('请按回车键开始');
-		
+
 		$('#rolling_board').hide();
 		$('#rotate_div').css('background', '');
 	}
@@ -194,13 +194,13 @@ function on_step_open(){
 
 function on_step_close(){
 	var str = '';
-	str += '<span style="font-size:30px;">&nbsp;* 中奖名单 *&nbsp;</span><br/><br/><br/><div style="color: #D14; font-size:40px; font-weight:700;text-align:left; line-height:1.5">';
+	str += '<span style="font-size:30px;">&nbsp;* 中奖名单 *&nbsp;</span><br/><br/><br/><div style="color: #D14; font-size:40px; font-weight:700;text-align:center; line-height:1.5">';
 	var r = game.results[game.step - 1];
 	for(var n=0; n<r.length; n++){
-		str += r[n] +'&nbsp;&nbsp;';
+		str += r[n] +'<br/>';
 	}
 	str += '</div>';
-	
+
 	print_box(str);
 	$('#rolling_board').slideUp('normal');
 }
@@ -215,7 +215,7 @@ function on_rotate_start(){
 
 	// 打乱顺序
 	array_shuffle(game.candidates);
-	
+
 	rotate_run();
 
 	show_current_step();
@@ -248,7 +248,7 @@ function rotate_run(){
 
 	if(game.stop){
 		game.action = 'rotate_start';
-		
+
 		game.results[game.step] = game.results[game.step].concat(arr);
 		game.candidates = array_del_all(game.candidates, arr);
 
@@ -350,6 +350,6 @@ function save_setting(){
 		str += '<span>'+ p + '</span>';
 	}
 	$('#candidate').html(str);
-
+	$('#event_title > span').html($('input[name=title]').val());
 	game.init();
 }

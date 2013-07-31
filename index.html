@@ -2,34 +2,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>应用汇抽奖系统</title>
-<meta property="wb:webmaster" content="84fa9a1bab7ca558" />
+<title>js抽奖程序</title>
 <link rel="stylesheet" type="text/css" href="style/bootstrap.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-modal.js"></script>
 <script type="text/javascript" src="js/lottery.js"></script>
 <style type="text/css">
-	body{background:#ffc20f url(./img/bg.jpg) no-repeat top center;}
+	body{background:#6b0707 url(./img/bg.png) no-repeat top center;}
+	.cl:after {visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+    .cl {zoom:1;}
 	.about{position: absolute; top: 20px; right: 20px;}
 	.ini{position: absolute; top:20px; right: 90px;}
-	.main{margin-top: 170px;}
+	.wrap{width: 900px;margin: 430px auto 0 auto; background:#6b0707 url(./img/bd.png) repeat-y;}
+	.left{float: left; width: 476px;margin-left: 90px; margin-top: -212px;}
+	.right{float: right; width: 223px;margin-right: 93px;margin-top: -212px;}
+	.ft{ width:900px; margin:0 auto; height:175px;background:#6b0707 url(./img/ft.png) no-repeat; }
+	.well{background: rgba(250,250,250,.5);border: none;}
+	#event_title{text-align: center;margin-top: 80px; font-size: 70px; color: #edb76d;}
 	#print_box{padding:20px 0 5px 0;  text-align: center; font-weight: 700; font-size: 16px;}
 	#rolling_board{ line-height: 1.5; margin:10px 0; font-size: 50px; font-weight: 700; text-align: center;padding:50px 0;}
 	#result label{color: #d14; font-weight: 700; font-size: 16px;margin:10px 0;}
-	#result span,#candidate span{ margin:5px;}
+	#result span,#candidate span{ margin:5px;display: block;}
+
 </style>
 </head>
 <body>
-<a class="btn btn-small btn-info about"   data-toggle="modal" href="#myModal1"><i class="icon-info-sign icon-white"></i> 关于</a>
+<a class="btn btn-small about"   data-toggle="modal" href="#myModal1"><i class="icon-info-sign"></i> 关于</a>
 <a class="btn btn-small ini"   data-toggle="modal" href="#myModal"><i class="icon-cog"></i> 设置</a>
-<div class="container">
-<div class="span12 main">
-		<div class="well">
-			<h3>候选人名单</h3>
-			<div id="candidate">暂无结果</div>
-		</div>
-</div>
-<div class="span12">
+<h1 id="event_title"><span>js抽奖程序</span></h1>
+<div class="wrap cl">
+	<div class="left">
 		<div class="well">
 			<div id="rotate_div" style="">
 				<h2 id="current_step"></h2>
@@ -39,17 +41,19 @@
 				<div id="print_box">请按空格键开始</div>
 			</div>
 		</div>
-</div>
-
-<div class="span12">
-	
-	<div class="well">
-		<h3>中奖名单</h3>
-		<div id="result">暂无结果</div>
+	</div>
+	<div class="right">
+		<!-- <div class="well">
+			<h3>候选人名单</h3>
+			<div id="candidate">暂无结果</div>
+		</div> -->
+		<div class="well">
+			<h3>中奖名单</h3>
+			<div id="result">暂无结果</div>
+		</div>
 	</div>
 </div>
-
-</div>
+<div class="ft"></div>
 <!--ini-->
 <div class="modal hide" id="myModal">
 <div class="modal-header">
@@ -57,10 +61,12 @@
 <h3>系统设置</h3>
 </div>
 <div class="modal-body">
+<h3>活动标题</h3>
+<p><input type="text" name="title" value="活动标题" /></p>
 <h3>奖项设置</h3>
 <p>每行一个奖项, 格式为竖线分隔的: 奖项名|数量|每次抽几个|奖品</p>
 <textarea name="prizes" style="width:400px;" rows="5" >
-三等奖|10|10|iphone4一台/每人
+三等奖|4|2|iphone4一台/每人
 二等奖|2|2|macbook一台/每人
 一等奖|1|1|imac一台/每人
 </textarea>
@@ -68,6 +74,18 @@
 <h3>候选人列表</h3>
 <p>每行一人, 或半角逗号分隔</p>
 <textarea name="candidates" rows="5" style="width:400px;" >
+135****3456
+158****3267
+186****6689
+152****9090
+135****4456
+158****3567
+186****6789
+152****9990
+135****3556
+158****3327
+186****7789
+152****1888
 </textarea>
 <h3>跳动时间间隔</h3>
 <p><input type="text" name="interval" value="50" style="width: 50px;" /> ms</p>
@@ -87,7 +105,7 @@
 <div class="modal-body">
 	<ul>
 		<li>JavaScript+HTML+CSS开发而成, 支持IE6+,Chrome,Firefox等浏览器。</li>
-		<li>抽奖过程全键盘操作, 只需要按回车键即可。</li>
+		<li>抽奖过程全键盘操作, 只需要按空格键即可。</li>
 		<li>支持活动标题, 奖项, 候选人, 摇奖时的跳转速度等设置。</li>
 		<li>程序用<a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Bootstrap</a>、<a herf="http://jquery.com/" target="_blank">jQuery</a>开发而成，技术支持<a href="http://weibo.com/dcoupe" target="_blank">@濯焰</a></li>
 	</ul>
